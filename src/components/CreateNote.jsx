@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { add_new_note } from '../redux/actions/notes.action';
 
-const CreateNote = ({ add_new_note }) => {
+const CreateNote = () => {
   const [note, setNote] = useState('');
 
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -13,7 +14,7 @@ const CreateNote = ({ add_new_note }) => {
       date: new Date().toJSON().slice(0, 10),
       isImportant: false,
     };
-    add_new_note(data);
+    dispatch(add_new_note(data));
   };
 
   return (
@@ -36,4 +37,5 @@ const CreateNote = ({ add_new_note }) => {
   );
 };
 
-export default connect(null, { add_new_note })(CreateNote);
+// export default connect(null, { add_new_note })(CreateNote);
+export default CreateNote;
